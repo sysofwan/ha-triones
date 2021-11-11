@@ -1,0 +1,11 @@
+{
+    "domain": "triones",
+    "name": "Triones",
+    "documentation": "https://example.com",
+    "config_flow": true,
+    "dependencies": [],
+    "codeowners": [],
+    "requirements": ["bleak==0.13.0"],
+    "iot_class": "local_polling",
+    "version": "0.0.1"
+}
