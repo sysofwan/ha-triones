@@ -41,7 +41,7 @@ The setup needs to be repeated for each light.
 [Light modes](https://github.com/madhead/saberlight/blob/master/protocols/Triones/protocol.md#built-in-modes) (blinking, fading, etc) is not yet supported.
 
 ## Known issues
-1. Light connection may fail a few times after Home Assistant reboot. The integration will reconnect and the issue usually resolves itself.
+1. Light connection may fail a few times after Home Assistant reboot. The integration will usually reconnect and the issue will resolve itself.
 2. After toggling lights, Home Assistant may not reflect state changes for up to 30 seconds. This is due to a lag in Triones status API.
 
 ## Credits
