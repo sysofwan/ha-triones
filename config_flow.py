@@ -33,7 +33,9 @@ class TrionesFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             await self.async_set_unique_id(format_mac(self.mac))
             return await self.async_step_validate()
 
+        already_configured = self._async_current_ids(False)
         devices = await discover()
+        devices = [device for device in devices if format_mac(device.address) not in already_configured]
 
         if not devices:
             return await self.async_step_manual()
