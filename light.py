@@ -7,9 +7,6 @@ from .const import DOMAIN
 
 from homeassistant.const import CONF_MAC
 import homeassistant.helpers.config_validation as cv
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.components.light import (COLOR_MODE_RGB, PLATFORM_SCHEMA,
                                             LightEntity, ATTR_RGB_COLOR, ATTR_BRIGHTNESS, COLOR_MODE_WHITE, ATTR_WHITE)
 from homeassistant.util.color import (_match_max_scale)
@@ -20,22 +17,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 async def async_setup_entry(hass, config_entry, async_add_devices):
     """Add sensors for passed config_entry in HA."""
-    instance = TrionesInstance(config_entry.data[CONF_MAC])
+    instance = hass.data[DOMAIN][config_entry.entry_id]
     async_add_devices([TrionesLight(instance, config_entry.data["name"])])
-
-# def setup_platform(
-#     hass: HomeAssistant,
-#     config: ConfigType,
-#     add_entities: AddEntitiesCallback,
-#     discovery_info: DiscoveryInfoType
-# ) -> None:
-#     # Assign configuration variables.
-#     # The configuration check takes care they are present.
-#     mac = config[CONF_MAC]
-
-#     instance = TrionesInstance(mac)
-
-#     add_entities([TrionesLight(instance, mac)])
 
 class TrionesLight(LightEntity):
     """Representation of an Awesome Light."""

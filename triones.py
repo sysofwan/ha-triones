@@ -88,4 +88,5 @@ class TrionesInstance:
             LOGGER.debug(track)
 
     async def disconnect(self):
-        await self._device.disconnect()
+        if self._device.is_connected:
+            await self._device.disconnect()
