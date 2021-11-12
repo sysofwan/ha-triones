@@ -8,6 +8,9 @@ Home Assistant integration for BLE based Triones or HappyLighting lights.
 Supports controlling BLE based lights controllable through the Triones or HappyLighting apps.
 
 ## Installation
+
+Note: Restart is always required after installation.
+
 ### [HACS](https://hacs.xyz/) (recommended)
 Installation can be done through [HACS custom repository](https://hacs.xyz/docs/faq/custom_repositories).
 
