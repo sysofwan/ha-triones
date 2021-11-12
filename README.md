@@ -38,7 +38,7 @@ The setup needs to be repeated for each light.
 5. Multiple light support
 
 ## Not supported
-Light modes (blinking, fading, etc) is not yet supported.
+[Light modes](https://github.com/madhead/saberlight/blob/master/protocols/Triones/protocol.md#built-in-modes) (blinking, fading, etc) is not yet supported.
 
 ## Known issues
 1. Light connection may fail a few times after Home Assistant reboot. The integration will reconnect and the issue usually resolves itself.
