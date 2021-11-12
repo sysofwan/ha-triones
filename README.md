@@ -9,7 +9,7 @@ Supports controlling BLE based lights controllable through the Triones or HappyL
 
 ## Installation
 ### [HACS](https://hacs.xyz/) (recommended)
-Installation can be done through [HACS custom repository](https://hacs.xyz/docs/faq/custom_repositories)
+Installation can be done through [HACS custom repository](https://hacs.xyz/docs/faq/custom_repositories).
 
 ### Manual installation
 You can manually clone this repository inside `config/custom_components/triones`.
