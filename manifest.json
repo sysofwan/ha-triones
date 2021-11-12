@@ -1,7 +1,8 @@
 {
     "domain": "triones",
     "name": "Triones",
-    "documentation": "https://example.com",
+    "documentation": "https://github.com/sysofwan/ha-triones",
+    "issue_tracker": "https://github.com/sysofwan/ha-triones/issues",
     "config_flow": true,
     "dependencies": [],
     "codeowners": [],
