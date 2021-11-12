@@ -21,16 +21,16 @@ git clone https://github.com/sysofwan/ha-triones triones
 ```
 
 ## Setup
-After installation, you should find Triones under the Configration -> Integrations -> Add integration.
+After installation, you should find Triones under the Configuration -> Integrations -> Add integration.
 
-The stup step includes discovery which will list out all Triones lights discovered. The setup will validate connection by toggling the selected light. Make sure your light is in-sight to validate this.
+The setup step includes discovery which will list out all Triones lights discovered. The setup will validate connection by toggling the selected light. Make sure your light is in-sight to validate this.
 
 The setup needs to be repeated for each light.
 
 ## Features
 1. Discovery: Automatically discover Triones based lights without manually hunting for Bluetooth MAC address
 2. On/Off/RGB/Brightness support
-3. Live state polling: External control (i.e. IR remote) state changes will reflect in Home Assitant
+3. Live state polling: External control (i.e. IR remote) state changes will reflect in Home Assistant
 4. Emulated RGB brightness: Supports adjusting brightness of RGB lights
 5. Multiple light support
 
@@ -38,8 +38,8 @@ The setup needs to be repeated for each light.
 Light modes (blinking, fading, etc) is not yet supported.
 
 ## Known issues
-1. Light connection may fail a few times after Home Assitant reboot. The integration will reconnect and the issue usually resolves itself.
-2. After toggling lights, Home Assitant may not reflect state changes for up to 30 seconds. This is due to a lag in Triones status API.
+1. Light connection may fail a few times after Home Assistant reboot. The integration will reconnect and the issue usually resolves itself.
+2. After toggling lights, Home Assistant may not reflect state changes for up to 30 seconds. This is due to a lag in Triones status API.
 
 ## Credits
 This integration will not be possible without the awesome work of reverse engineering and documenting the Triones BLE protocol [here](https://github.com/madhead/saberlight/blob/master/protocols/Triones/protocol.md).
