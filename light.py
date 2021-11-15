@@ -10,24 +10,20 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.components.light import (COLOR_MODE_RGB, PLATFORM_SCHEMA,
                                             LightEntity, ATTR_RGB_COLOR, ATTR_BRIGHTNESS, COLOR_MODE_WHITE, ATTR_WHITE)
 from homeassistant.util.color import (_match_max_scale)
+from homeassistant.helpers import device_registry
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_MAC): cv.string
 })
 
 async def async_setup_entry(hass, config_entry, async_add_devices):
-    """Add sensors for passed config_entry in HA."""
     instance = hass.data[DOMAIN][config_entry.entry_id]
-    async_add_devices([TrionesLight(instance, config_entry.data["name"])])
+    async_add_devices([TrionesLight(instance, config_entry.data["name"], config_entry.entry_id)])
 
 class TrionesLight(LightEntity):
-    """Representation of an Awesome Light."""
-
-    def __init__(self, trionesInstance: TrionesInstance, name: str) -> None:
-        """Initialize an AwesomeLight."""
+    def __init__(self, trionesInstance: TrionesInstance, name: str, entry_id: str) -> None:
         self._instance = trionesInstance
-        self._state = None
-        self._brightness = None
+        self._entry_id = entry_id
         self._attr_supported_color_modes = {COLOR_MODE_RGB, COLOR_MODE_WHITE}
         self._color_mode = None
         self._attr_name = name
@@ -49,11 +45,10 @@ class TrionesLight(LightEntity):
 
     @property
     def is_on(self) -> Optional[bool]:
-        """Return true if light is on."""
         return self._instance.is_on
 
     @property
-    # TODO: https://github.com/home-assistant/core/issues/51175
+    # RGB color/brightness based on https://github.com/home-assistant/core/issues/51175
     def rgb_color(self):
         if self._instance.rgb_color:
             return _match_max_scale((255,), self._instance.rgb_color)
@@ -67,16 +62,23 @@ class TrionesLight(LightEntity):
             return COLOR_MODE_RGB
         return None
 
+    @property
+    def device_info(self):
+        return {
+            "identifiers": {
+                (DOMAIN, self._instance.mac)
+            },
+            "name": self.name,
+            "connections": {(device_registry.CONNECTION_NETWORK_MAC, self._instance.mac)},
+            "config_entry_id": self._entry_id
+        }
+
     def _transform_color_brightness(self, color: Tuple[int, int, int], set_brightness: int):
         rgb = _match_max_scale((255,), color)
         res = tuple(color * set_brightness // 255 for color in rgb)
         return res
 
     async def async_turn_on(self, **kwargs: Any) -> None:
-        """Instruct the light to turn on.
-        You can skip the brightness part if your light does not support
-        brightness control.
-        """
         if not self.is_on:
             await self._instance.turn_on()
 
