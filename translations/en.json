@@ -17,7 +17,8 @@
             },
             "manual": {
                 "data": {
-                    "mac": "Bluetooth MAC address"
+                    "mac": "Bluetooth MAC address",
+                    "name": "Name"
                 },
                 "title": "Enter bluetooth MAC address"
             }

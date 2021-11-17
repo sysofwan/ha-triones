@@ -35,6 +35,7 @@ class TrionesFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         already_configured = self._async_current_ids(False)
         devices = await discover()
+        LOGGER.debug("Discovered devices: %s", [device.address for device in devices])
         devices = [device for device in devices if format_mac(device.address) not in already_configured]
 
         if not devices:
@@ -84,13 +85,15 @@ class TrionesFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_manual(self, user_input: "dict[str, Any] | None" = None):
         if user_input is not None:            
             self.mac = user_input["mac"]
+            self.name = user_input["name"]
             await self.async_set_unique_id(format_mac(self.mac))
             return await self.async_step_validate()
 
         return self.async_show_form(
             step_id="manual", data_schema=vol.Schema(
                 {
-                    vol.Required("mac"): str
+                    vol.Required("mac"): str,
+                    vol.Required("name"): str
                 }
             ), errors={})
 
