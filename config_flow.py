@@ -35,7 +35,6 @@ class TrionesFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         already_configured = self._async_current_ids(False)
         devices = await discover()
-        LOGGER.debug("Discovered devices: %s", [device.address for device in devices])
         devices = [device for device in devices if format_mac(device.address) not in already_configured]
 
         if not devices:

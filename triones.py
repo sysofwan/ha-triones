@@ -11,6 +11,7 @@ R_CHARACTERISTIC_UUID = "0000ffd4-0000-1000-8000-00805f9b34fb"
 async def discover():
     """Discover Bluetooth LE devices."""
     devices = await BleakScanner.discover()
+    LOGGER.debug("Discovered devices: %s", [{"address": device.address, "name": device.name} for device in devices])
     return [device for device in devices if device.name.lower().startswith("triones")]
 
 def create_status_callback(future: asyncio.Future):
