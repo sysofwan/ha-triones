@@ -44,5 +44,17 @@ The setup needs to be repeated for each light.
 1. Light connection may fail a few times after Home Assistant reboot. The integration will usually reconnect and the issue will resolve itself.
 2. After toggling lights, Home Assistant may not reflect state changes for up to 30 seconds. This is due to a lag in Triones status API.
 
+## Debugging
+Add the following to `configuration.yml` to show debugging logs. Please make sure to include debug logs when filing an issue.
+
+See [logger intergration docs](https://www.home-assistant.io/integrations/logger/) for more information to configure logging.
+
+```yml
+logger:
+  default: warn
+  logs:
+    custom_components.triones: debug
+```
+
 ## Credits
 This integration will not be possible without the awesome work of reverse engineering and documenting the Triones BLE protocol [here](https://github.com/madhead/saberlight/blob/master/protocols/Triones/protocol.md).
