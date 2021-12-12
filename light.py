@@ -9,7 +9,7 @@ from homeassistant.const import CONF_MAC
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.light import (COLOR_MODE_RGB, PLATFORM_SCHEMA,
                                             LightEntity, ATTR_RGB_COLOR, ATTR_BRIGHTNESS, COLOR_MODE_WHITE, ATTR_WHITE)
-from homeassistant.util.color import (_match_max_scale)
+from homeassistant.util.color import (match_max_scale)
 from homeassistant.helpers import device_registry
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
@@ -51,7 +51,7 @@ class TrionesLight(LightEntity):
     # RGB color/brightness based on https://github.com/home-assistant/core/issues/51175
     def rgb_color(self):
         if self._instance.rgb_color:
-            return _match_max_scale((255,), self._instance.rgb_color)
+            return match_max_scale((255,), self._instance.rgb_color)
         return None
 
     @property
@@ -74,7 +74,7 @@ class TrionesLight(LightEntity):
         }
 
     def _transform_color_brightness(self, color: Tuple[int, int, int], set_brightness: int):
-        rgb = _match_max_scale((255,), color)
+        rgb = match_max_scale((255,), color)
         res = tuple(color * set_brightness // 255 for color in rgb)
         return res
 
