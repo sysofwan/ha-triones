@@ -1,3 +1,6 @@
+# ⚠️ Archived ⚠️
+This repository is archived and no longer maintained. [BLE LEDs are now officially supported as part of Home Assistant](https://www.home-assistant.io/integrations/led_ble/).
+ 
 # ha-triones
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/sysofwan/ha-triones)
 ![Hassfest](https://github.com/sysofwan/ha-triones/actions/workflows/hassfest.yaml/badge.svg)
